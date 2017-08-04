@@ -13,32 +13,45 @@ import UIKit
     @IBInspectable var fillColor: UIColor = UIColor.blue
     @IBInspectable var lineColor: UIColor = UIColor.white
     @IBInspectable var lineWidth: CGFloat = 3.0
+    @IBInspectable var useContext: Bool = false
+    
     
     override func draw(_ rect: CGRect) {
-        drawBackground(rect)
+        drawBackground()
         drawHorizontalLine()
     }
     
-    func drawBackground(_ rect: CGRect) {
-        let path = UIBezierPath(roundedRect: rect, cornerRadius: 20.0)
+    func drawBackground() {
+        let path = UIBezierPath(roundedRect: bounds, cornerRadius: 20.0)
         fillColor.setFill()
         path.fill()
     }
     
     func drawHorizontalLine() {
         print(bounds)
-        let lineLength: CGFloat = min(bounds.width, bounds.height)
-        
-        let linePath = UIBezierPath()
-        linePath.lineWidth = lineWidth
-        linePath.move(to: CGPoint(x: bounds.width/2 - lineLength/3, y: bounds.height/2))
-        linePath.addLine(to: CGPoint(x: bounds.width/2 + lineLength/3, y: bounds.height/2))
-        
+        let lineLength = bounds.width
         let pattern: [CGFloat] = [10.0, 5.0]
-        linePath.setLineDash(pattern, count: 2, phase: 0.0)
         
-        lineColor.setStroke()
-        linePath.stroke()
+        if useContext {
+            
+            let con = UIGraphicsGetCurrentContext()!
+            con.setLineWidth(lineWidth)
+            con.move(to: CGPoint(x: 0, y: bounds.height/2))
+            con.addLine(to: CGPoint(x: lineLength, y: bounds.height/2))
+            con.setLineDash(phase: 0.0, lengths: pattern)
+            con.setStrokeColor(lineColor.cgColor)
+            con.strokePath()
+            
+        } else {
+            
+            let linePath = UIBezierPath()
+            linePath.lineWidth = lineWidth
+            linePath.move(to: CGPoint(x: 0, y: bounds.height/2))
+            linePath.addLine(to: CGPoint(x: lineLength, y: bounds.height/2))
+            linePath.setLineDash(pattern, count: 2, phase: 0.0)
+            UIColor.cyan.setStroke()
+            linePath.stroke()
+            
+        }
     }
-    
 }
