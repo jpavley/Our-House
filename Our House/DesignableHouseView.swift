@@ -8,50 +8,63 @@
 
 import UIKit
 
+/// Grid branch:
+/// Create a 15 x 26 grid of cells that fits any iOS device screen size
+/// and maintains a perfect square aspect ratio.
 @IBDesignable class DesignableHouseView: UIView {
     
-    @IBInspectable var fillColor: UIColor = UIColor.blue
-    @IBInspectable var lineColor: UIColor = UIColor.white
-    @IBInspectable var lineWidth: CGFloat = 3.0
-    @IBInspectable var useContext: Bool = false
+    @IBInspectable var fillColor: UIColor = UIColor.lightGray
+    @IBInspectable var lineColor: UIColor = UIColor.black
+    @IBInspectable var lineThickness: CGFloat = 1.0
+    @IBInspectable var rows: Int = 26
+    @IBInspectable var cols: Int = 15
+    @IBInspectable var dashSegmentWidth: CGFloat = 2.0
+    @IBInspectable var dashGapWidth: CGFloat = 2.0
     
+    var cellSideLength: CGFloat = 0.0
     
     override func draw(_ rect: CGRect) {
         drawBackground()
-        drawHorizontalLine()
+        drawGrid()
     }
     
     func drawBackground() {
-        let path = UIBezierPath(roundedRect: bounds, cornerRadius: 20.0)
+        let path = UIBezierPath(rect: bounds)
         fillColor.setFill()
         path.fill()
     }
     
-    func drawHorizontalLine() {
+    func drawGrid() {
         print(bounds)
-        let lineLength = bounds.width
-        let pattern: [CGFloat] = [10.0, 5.0]
         
-        if useContext {
-            
-            let con = UIGraphicsGetCurrentContext()!
-            con.setLineWidth(lineWidth)
-            con.move(to: CGPoint(x: 0, y: bounds.height/2))
-            con.addLine(to: CGPoint(x: lineLength, y: bounds.height/2))
-            con.setLineDash(phase: 0.0, lengths: pattern)
-            con.setStrokeColor(lineColor.cgColor)
-            con.strokePath()
-            
-        } else {
-            
-            let linePath = UIBezierPath()
-            linePath.lineWidth = lineWidth
-            linePath.move(to: CGPoint(x: 0, y: bounds.height/2))
-            linePath.addLine(to: CGPoint(x: lineLength, y: bounds.height/2))
-            linePath.setLineDash(pattern, count: 2, phase: 0.0)
-            UIColor.cyan.setStroke()
-            linePath.stroke()
-            
+        calcCellSideLength()
+        
+        for col in 0..<cols {
+            for row in 0..<rows {
+                drawCell(col: col, row: row)
+            }
         }
+    }
+    
+    func calcCellSideLength() {
+        let cellWidthCandidate = bounds.width/CGFloat(cols)
+        let cellHeightCandidate = bounds.height/CGFloat(rows)
+        
+        cellSideLength = min(cellWidthCandidate, cellHeightCandidate)
+    }
+    
+    func drawCell(col: Int, row: Int) {
+        let x1 = cellSideLength * CGFloat(col)
+        let y1 = cellSideLength * CGFloat(row)
+        
+        let cellPath = UIBezierPath(rect: CGRect(x: x1, y: y1, width: cellSideLength, height: cellSideLength))
+        cellPath.lineWidth = lineThickness
+        
+        cellPath.move(to: CGPoint(x: x1, y: x1))
+        let pattern: [CGFloat] = [dashSegmentWidth, dashGapWidth]
+        cellPath.setLineDash(pattern, count: 2, phase: 0.0)
+        lineColor.setStroke()
+        cellPath.stroke()
+        
     }
 }

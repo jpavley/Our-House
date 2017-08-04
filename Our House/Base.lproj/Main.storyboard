@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina3_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -18,21 +18,15 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTr-Sc-qqV" customClass="DesignableHouseView" customModule="Our_House" customModuleProvider="target">
-                                <rect key="frame" x="8" y="24" width="359" height="635"/>
+                                <rect key="frame" x="0.0" y="20" width="480" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
-                                        <color key="value" red="0.1883389345" green="0.17630884429999999" blue="0.4918305838" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
                                         <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                        <color key="value" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="useContext" value="NO"/>
                                 </userDefinedRuntimeAttributes>
@@ -40,10 +34,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="uTr-Sc-qqV" secondAttribute="trailing" constant="8" id="CTC-Nu-BlB"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uTr-Sc-qqV" secondAttribute="bottom" constant="8" id="Csb-Qp-48u"/>
-                            <constraint firstItem="uTr-Sc-qqV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="4" id="Q2y-6y-akc"/>
-                            <constraint firstItem="uTr-Sc-qqV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="z6c-7O-Byq"/>
+                            <constraint firstAttribute="trailing" secondItem="uTr-Sc-qqV" secondAttribute="trailing" id="Hp5-dA-fcW"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uTr-Sc-qqV" secondAttribute="bottom" id="MOz-no-tgY"/>
+                            <constraint firstItem="uTr-Sc-qqV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mcf-Xn-EbD"/>
+                            <constraint firstItem="uTr-Sc-qqV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="wKS-sA-r5e"/>
                         </constraints>
                     </view>
                 </viewController>
