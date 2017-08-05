@@ -15,6 +15,7 @@ import UIKit
     
     let fillColor = UIColor.lightGray
     let lineColor = UIColor.black
+    let backColor = UIColor.black
     
     let lineThickness: CGFloat = 1.0
     
@@ -39,7 +40,7 @@ import UIKit
     
     func drawBackground() {
         let path = UIBezierPath(rect: bounds)
-        fillColor.setFill()
+        backColor.setFill()
         path.fill()
     }
     
@@ -91,6 +92,8 @@ import UIKit
         
         let pattern: [CGFloat] = [dashSegmentWidth, dashGapWidth]
         cellPath.setLineDash(pattern, count: 2, phase: 0.0)
+        fillColor.setFill()
+        cellPath.fill()
         lineColor.setStroke()
         cellPath.stroke()
         
