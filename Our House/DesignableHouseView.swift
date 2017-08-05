@@ -27,6 +27,11 @@ import UIKit
     var gridHOffset: CGFloat = 0.0
     var gridVOffset: CGFloat = 0.0
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.setNeedsDisplay()
+    }
+    
     override func draw(_ rect: CGRect) {
         drawBackground()
         drawGrid()
